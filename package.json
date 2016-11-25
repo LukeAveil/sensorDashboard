@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --quiet *.js **/*.js"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +18,8 @@
     "babel-loader": "^6.2.2",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
-    "webpack": "^1.12.13"
+    "webpack": "^1.12.13",
+    "eslint": "^3.10.2",
+    "eslint-plugin-react": "^6.7.1"
   }
 }

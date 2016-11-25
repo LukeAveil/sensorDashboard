@@ -48,12 +48,9 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
+	var Main = __webpack_require__(159);
 
-	ReactDOM.render(React.createElement(
-	  'h1',
-	  null,
-	  'Boilerplate app'
-	), document.getElementById('app'));
+	ReactDOM.render(React.createElement(Main, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -19744,6 +19741,144 @@
 
 	module.exports = __webpack_require__(3);
 
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var Sensor = __webpack_require__(160);
+
+	var Main = React.createClass({
+	  displayName: 'Main',
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Main Component'
+	      ),
+	      React.createElement(Sensor, null)
+	    );
+	  }
+	});
+
+	module.exports = Main;
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var LastReported = __webpack_require__(161);
+	var LatestValue = __webpack_require__(162);
+	var Graph = __webpack_require__(163);
+
+	var Sensor = React.createClass({
+	  displayName: 'Sensor',
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Sensor Component'
+	      ),
+	      React.createElement(LastReported, null),
+	      React.createElement(LatestValue, null),
+	      React.createElement(Graph, null)
+	    );
+	  }
+	});
+
+	module.exports = Sensor;
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var LastReported = React.createClass({
+	  displayName: 'LastReported',
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        'LastReported Component'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = LastReported;
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var LatestValue = React.createClass({
+	  displayName: 'LatestValue',
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        'LatestValue Component'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = LatestValue;
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var Graph = React.createClass({
+	  displayName: 'Graph',
+
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Graph Component'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Graph;
 
 /***/ }
 /******/ ]);

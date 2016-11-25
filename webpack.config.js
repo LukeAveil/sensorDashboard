@@ -7,7 +7,11 @@ module.exports = {
   resolve: {
     root: __dirname,
     alias: {
-
+      Main: 'app/components/Main.jsx',
+      Sensor: 'app/components/Sensor.jsx',
+      LastReported: 'app/components/LastReported.jsx',
+      LatestValue: 'app/components/LatestValue.jsx',
+      Graph: 'app/components/Graph.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },
