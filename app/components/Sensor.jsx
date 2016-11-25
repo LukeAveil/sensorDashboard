@@ -5,12 +5,11 @@ var Graph = require('Graph');
 
 var Sensor = React.createClass({
   render: function() {
+    var {name} = this.props;
+
     return (
       <div>
-        <h2>Sensor Component</h2>
-        <LastReported/>
-        <LatestValue/>
-        <Graph/>
+        {name}
       </div>
     );
   }

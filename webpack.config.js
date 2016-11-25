@@ -8,6 +8,7 @@ module.exports = {
     root: __dirname,
     alias: {
       Main: 'app/components/Main.jsx',
+      SensorList: 'app/components/SensorList.jsx',
       Sensor: 'app/components/Sensor.jsx',
       LastReported: 'app/components/LastReported.jsx',
       LatestValue: 'app/components/LatestValue.jsx',

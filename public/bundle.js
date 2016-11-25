@@ -19749,21 +19749,33 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var Sensor = __webpack_require__(160);
+	var SensorList = __webpack_require__(160);
 
 	var Main = React.createClass({
 	  displayName: 'Main',
 
+	  getInitialState: function getInitialState() {
+	    return {
+	      sensors: [{
+	        "id": "46c634d04cc2fb4a4ee0f1596c5330328130ff80",
+	        "name": "external"
+	      }, {
+	        "id": "d823cb4204c9715f5c811feaabeea45ce06736a0",
+	        "name": "office"
+	      }, {
+	        "id": "437b3687100bcb77959a5fb6d0351b41972b1173",
+	        "name": "common room"
+	      }]
+	    };
+	  },
 	  render: function render() {
+	    var sensors = this.state.sensors;
+
+
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(
-	        'h2',
-	        null,
-	        'Main Component'
-	      ),
-	      React.createElement(Sensor, null)
+	      React.createElement(SensorList, { sensors: sensors })
 	    );
 	  }
 	});
@@ -19776,26 +19788,55 @@
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var React = __webpack_require__(1);
-	var LastReported = __webpack_require__(161);
-	var LatestValue = __webpack_require__(162);
-	var Graph = __webpack_require__(163);
+	var Sensor = __webpack_require__(161);
+
+	var SensorList = React.createClass({
+	  displayName: 'SensorList',
+
+	  render: function render() {
+	    var sensors = this.props.sensors;
+
+	    var renderSensors = function renderSensors() {
+	      return sensors.map(function (sensor) {
+	        return React.createElement(Sensor, _extends({ key: sensor.id }, sensor));
+	      });
+	    };
+
+	    return React.createElement(
+	      'div',
+	      null,
+	      renderSensors()
+	    );
+	  }
+	});
+
+	module.exports = SensorList;
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var LastReported = __webpack_require__(162);
+	var LatestValue = __webpack_require__(163);
+	var Graph = __webpack_require__(164);
 
 	var Sensor = React.createClass({
 	  displayName: 'Sensor',
 
 	  render: function render() {
+	    var name = this.props.name;
+
+
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(
-	        'h2',
-	        null,
-	        'Sensor Component'
-	      ),
-	      React.createElement(LastReported, null),
-	      React.createElement(LatestValue, null),
-	      React.createElement(Graph, null)
+	      name
 	    );
 	  }
 	});
@@ -19803,7 +19844,7 @@
 	module.exports = Sensor;
 
 /***/ },
-/* 161 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19829,7 +19870,7 @@
 	module.exports = LastReported;
 
 /***/ },
-/* 162 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19855,7 +19896,7 @@
 	module.exports = LatestValue;
 
 /***/ },
-/* 163 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
