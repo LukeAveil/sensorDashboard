@@ -19887,11 +19887,16 @@
 	    return React.createElement(
 	      "div",
 	      null,
-	      this.props.data.map(function (time) {
+	      React.createElement(
+	        "h3",
+	        null,
+	        "Latest Time!"
+	      ),
+	      this.props.data.map(function (data) {
 	        return React.createElement(
 	          "div",
-	          { key: time.id, className: "time" },
-	          time.time
+	          { key: data.id, className: "data" },
+	          data.time
 	        );
 	      })
 	    );
@@ -19912,14 +19917,21 @@
 	  displayName: "LatestValue",
 
 	  render: function render() {
+	    var data = this.props.data;
+
 	    return React.createElement(
 	      "div",
 	      null,
-	      this.props.data.map(function (value) {
+	      React.createElement(
+	        "h3",
+	        null,
+	        "Latest Values!"
+	      ),
+	      this.props.data.map(function (data) {
 	        return React.createElement(
 	          "div",
-	          { key: value.id, className: "value" },
-	          value.value
+	          { key: data.id, className: "data" },
+	          data.value
 	        );
 	      })
 	    );

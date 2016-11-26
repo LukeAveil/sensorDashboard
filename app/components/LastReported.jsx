@@ -4,10 +4,11 @@ var LastReported = React.createClass({
   render: function() {
     return (
       <div>
-        {this.props.data.map((time) => {
+        <h3>Latest Time!</h3>
+        {this.props.data.map((data) => {
           return (
-            <div key={time.id} className="time">
-              {time.time}
+            <div key={data.id} className="data">
+              {data.time}
             </div>
           );
         })}
