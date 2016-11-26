@@ -1,25 +1,30 @@
 var React = require('react');
 var SensorList = require('SensorList');
+var axios = require('axios');
 
 var Main = React.createClass({
   getInitialState: function() {
     return {
-      sensors: [
-        {
-            "id": "46c634d04cc2fb4a4ee0f1596c5330328130ff80",
-            "name": "external"
-        },
-        {
-            "id": "d823cb4204c9715f5c811feaabeea45ce06736a0",
-            "name": "office"
-        },
-        {
-            "id": "437b3687100bcb77959a5fb6d0351b41972b1173",
-            "name": "common room"
-        }
-      ]
+      sensors: []
     };
   },
+
+  componentDidMount: function() {
+    var _this = this;
+    this.serverRequest =
+      axios
+        .get("http://localhost:3000/sensors.json")
+        .then(function(result) {
+          _this.setState({
+            sensors: result.data
+          });
+        })
+  },
+
+  componentWillUnmount: function() {
+    this.serverRequest.abort();
+  },
+
   render: function() {
     var {sensors} = this.state;
 
