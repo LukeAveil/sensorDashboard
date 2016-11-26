@@ -19831,9 +19831,29 @@
 	var LastReported = __webpack_require__(162);
 	var LatestValue = __webpack_require__(163);
 	var Graph = __webpack_require__(164);
+	var axios = __webpack_require__(165);
 
 	var Sensor = React.createClass({
 	  displayName: 'Sensor',
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      data: []
+	    };
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    var _this = this;
+	    this.serverRequest = axios.get("http://localhost:3000/data.json").then(function (result) {
+	      _this.setState({
+	        data: result.data
+	      });
+	    });
+	  },
+
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.serverRequest.abort();
+	  },
 
 	  render: function render() {
 	    var name = this.props.name;
@@ -19842,7 +19862,14 @@
 	    return React.createElement(
 	      'div',
 	      null,
-	      name
+	      name,
+	      this.state.data.map(function (sensor) {
+	        return React.createElement(
+	          'div',
+	          { key: sensor.id, className: 'time' },
+	          sensor.time
+	        );
+	      })
 	    );
 	  }
 	});
@@ -19851,29 +19878,28 @@
 
 /***/ },
 /* 162 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var LastReported = React.createClass({
-	  displayName: 'LastReported',
-
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h2',
-	        null,
-	        'LastReported Component'
-	      )
-	    );
-	  }
-	});
-
-	module.exports = LastReported;
+	// var React = require('react');
+	//
+	// var LastReported = React.createClass({
+	//   render: function() {
+	//     var {data} = this.props;
+	//     var renderTime = () => {
+	//       return (
+	//         {data}
+	//       );
+	//     };
+	//     return (
+	//       <div>
+	//         {renderTime()}
+	//       </div>
+	//     );
+	//   }
+	// });
+	//
+	// module.exports = LastReported;
+	"use strict";
 
 /***/ },
 /* 163 */
