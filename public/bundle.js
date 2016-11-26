@@ -19884,6 +19884,8 @@
 	  displayName: "LastReported",
 
 	  render: function render() {
+	    var data = this.props.data;
+
 	    return React.createElement(
 	      "div",
 	      null,
@@ -19892,7 +19894,7 @@
 	        null,
 	        "Latest Time!"
 	      ),
-	      this.props.data.map(function (data) {
+	      data.map(function (data) {
 	        return React.createElement(
 	          "div",
 	          { key: data.id, className: "data" },
@@ -19927,7 +19929,7 @@
 	        null,
 	        "Latest Values!"
 	      ),
-	      this.props.data.map(function (data) {
+	      data.map(function (data) {
 	        return React.createElement(
 	          "div",
 	          { key: data.id, className: "data" },

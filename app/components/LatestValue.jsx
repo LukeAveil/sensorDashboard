@@ -6,7 +6,7 @@ var LatestValue = React.createClass({
     return (
       <div>
         <h3>Latest Values!</h3>
-        {this.props.data.map((data) => {
+        {data.map((data) => {
           return (
             <div key={data.id} className="data">
               {data.value}
