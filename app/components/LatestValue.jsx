@@ -4,7 +4,13 @@ var LatestValue = React.createClass({
   render: function() {
     return (
       <div>
-        <h2>LatestValue Component</h2>
+        {this.props.data.map((value) => {
+          return (
+            <div key={value.id} className="value">
+              {value.value}
+            </div>
+          );
+        })}
       </div>
     );
   }

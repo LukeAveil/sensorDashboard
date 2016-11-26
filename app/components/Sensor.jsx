@@ -29,17 +29,13 @@ var Sensor = React.createClass({
 
   render: function() {
     var {name} = this.props;
+    var {data} = this.state;
 
     return (
       <div>
         {name}
-        {this.state.data.map(function(sensor) {
-          return (
-            <div key={sensor.id} className="time">
-              {sensor.time}
-            </div>
-          );
-        })}
+        <LatestValue data={data}/>
+        <LastReported data={data}/>
       </div>
     );
   }

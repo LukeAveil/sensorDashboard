@@ -19857,19 +19857,15 @@
 
 	  render: function render() {
 	    var name = this.props.name;
+	    var data = this.state.data;
 
 
 	    return React.createElement(
 	      'div',
 	      null,
 	      name,
-	      this.state.data.map(function (sensor) {
-	        return React.createElement(
-	          'div',
-	          { key: sensor.id, className: 'time' },
-	          sensor.time
-	        );
-	      })
+	      React.createElement(LatestValue, { data: data }),
+	      React.createElement(LastReported, { data: data })
 	    );
 	  }
 	});
@@ -19878,49 +19874,54 @@
 
 /***/ },
 /* 162 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	// var React = require('react');
-	//
-	// var LastReported = React.createClass({
-	//   render: function() {
-	//     var {data} = this.props;
-	//     var renderTime = () => {
-	//       return (
-	//         {data}
-	//       );
-	//     };
-	//     return (
-	//       <div>
-	//         {renderTime()}
-	//       </div>
-	//     );
-	//   }
-	// });
-	//
-	// module.exports = LastReported;
 	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var LastReported = React.createClass({
+	  displayName: "LastReported",
+
+	  render: function render() {
+	    return React.createElement(
+	      "div",
+	      null,
+	      this.props.data.map(function (time) {
+	        return React.createElement(
+	          "div",
+	          { key: time.id, className: "time" },
+	          time.time
+	        );
+	      })
+	    );
+	  }
+	});
+
+	module.exports = LastReported;
 
 /***/ },
 /* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(1);
 
 	var LatestValue = React.createClass({
-	  displayName: 'LatestValue',
+	  displayName: "LatestValue",
 
 	  render: function render() {
 	    return React.createElement(
-	      'div',
+	      "div",
 	      null,
-	      React.createElement(
-	        'h2',
-	        null,
-	        'LatestValue Component'
-	      )
+	      this.props.data.map(function (value) {
+	        return React.createElement(
+	          "div",
+	          { key: value.id, className: "value" },
+	          value.value
+	        );
+	      })
 	    );
 	  }
 	});
