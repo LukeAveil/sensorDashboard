@@ -5,7 +5,8 @@ var axios = require('axios');
 var Main = React.createClass({
   getInitialState: function() {
     return {
-      sensors: []
+      sensors: [],
+      sensorsData: []
     };
   },
 
@@ -19,6 +20,13 @@ var Main = React.createClass({
             sensors: result.data
           });
         })
+      axios
+        .get("http://localhost:3000/data.json")
+        .then(function(result) {
+          _this.setState({
+            sensorsData: result.data
+          });
+        })
   },
 
   componentWillUnmount: function() {
@@ -26,11 +34,11 @@ var Main = React.createClass({
   },
 
   render: function() {
-    var {sensors} = this.state;
+    var {sensors, sensorsData} = this.state;
 
     return (
       <div>
-        <SensorList sensors={sensors}/>
+        <SensorList sensors={sensors} dataList={sensorsData}/>
       </div>
     );
   }

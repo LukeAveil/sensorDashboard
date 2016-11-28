@@ -19757,7 +19757,8 @@
 
 	  getInitialState: function getInitialState() {
 	    return {
-	      sensors: []
+	      sensors: [],
+	      sensorsData: []
 	    };
 	  },
 
@@ -19768,6 +19769,11 @@
 	        sensors: result.data
 	      });
 	    });
+	    axios.get("http://localhost:3000/data.json").then(function (result) {
+	      _this.setState({
+	        sensorsData: result.data
+	      });
+	    });
 	  },
 
 	  componentWillUnmount: function componentWillUnmount() {
@@ -19775,13 +19781,15 @@
 	  },
 
 	  render: function render() {
-	    var sensors = this.state.sensors;
+	    var _state = this.state,
+	        sensors = _state.sensors,
+	        sensorsData = _state.sensorsData;
 
 
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(SensorList, { sensors: sensors })
+	      React.createElement(SensorList, { sensors: sensors, dataList: sensorsData })
 	    );
 	  }
 	});
@@ -19794,8 +19802,6 @@
 
 	'use strict';
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 	var React = __webpack_require__(1);
 	var Sensor = __webpack_require__(161);
 
@@ -19803,11 +19809,17 @@
 	  displayName: 'SensorList',
 
 	  render: function render() {
-	    var sensors = this.props.sensors;
+	    var _props = this.props,
+	        dataList = _props.dataList,
+	        sensors = _props.sensors;
 
 	    var renderSensors = function renderSensors() {
 	      return sensors.map(function (sensor) {
-	        return React.createElement(Sensor, _extends({ key: sensor.id }, sensor));
+	        return dataList.map(function (data) {
+	          if (data.sensorId === sensor.id) {
+	            return React.createElement(Sensor, { key: data.sensorId, name: sensor.name, value: data.value, time: data.time });
+	          }
+	        });
 	      });
 	    };
 
@@ -19831,41 +19843,23 @@
 	var LastReported = __webpack_require__(162);
 	var LatestValue = __webpack_require__(163);
 	var Graph = __webpack_require__(164);
-	var axios = __webpack_require__(165);
 
 	var Sensor = React.createClass({
 	  displayName: 'Sensor',
 
-	  getInitialState: function getInitialState() {
-	    return {
-	      data: []
-	    };
-	  },
-
-	  componentDidMount: function componentDidMount() {
-	    var _this = this;
-	    this.serverRequest = axios.get("http://localhost:3000/data.json").then(function (result) {
-	      _this.setState({
-	        data: result.data
-	      });
-	    });
-	  },
-
-	  componentWillUnmount: function componentWillUnmount() {
-	    this.serverRequest.abort();
-	  },
-
 	  render: function render() {
-	    var name = this.props.name;
-	    var data = this.state.data;
+	    var _props = this.props,
+	        name = _props.name,
+	        time = _props.time,
+	        value = _props.value;
 
 
 	    return React.createElement(
 	      'div',
 	      null,
 	      name,
-	      React.createElement(LatestValue, { data: data }),
-	      React.createElement(LastReported, { data: data })
+	      React.createElement(LatestValue, { value: value }),
+	      React.createElement(LastReported, { time: time })
 	    );
 	  }
 	});
@@ -19876,31 +19870,20 @@
 /* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
 
 	var LastReported = React.createClass({
-	  displayName: "LastReported",
+	  displayName: 'LastReported',
 
 	  render: function render() {
-	    var data = this.props.data;
+	    var time = this.props.time;
 
 	    return React.createElement(
-	      "div",
+	      'div',
 	      null,
-	      React.createElement(
-	        "h3",
-	        null,
-	        "Latest Time!"
-	      ),
-	      data.map(function (data) {
-	        return React.createElement(
-	          "div",
-	          { key: data.id, className: "data" },
-	          data.time
-	        );
-	      })
+	      time
 	    );
 	  }
 	});
@@ -19911,31 +19894,20 @@
 /* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
 
 	var LatestValue = React.createClass({
-	  displayName: "LatestValue",
+	  displayName: 'LatestValue',
 
 	  render: function render() {
-	    var data = this.props.data;
+	    var value = this.props.value;
 
 	    return React.createElement(
-	      "div",
+	      'div',
 	      null,
-	      React.createElement(
-	        "h3",
-	        null,
-	        "Latest Values!"
-	      ),
-	      data.map(function (data) {
-	        return React.createElement(
-	          "div",
-	          { key: data.id, className: "data" },
-	          data.value
-	        );
-	      })
+	      value
 	    );
 	  }
 	});

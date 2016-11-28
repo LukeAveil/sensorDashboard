@@ -2,17 +2,10 @@ var React = require('react');
 
 var LatestValue = React.createClass({
   render: function() {
-    var {data} = this.props;
+    var {value} = this.props;
     return (
       <div>
-        <h3>Latest Values!</h3>
-        {data.map((data) => {
-          return (
-            <div key={data.id} className="data">
-              {data.value}
-            </div>
-          );
-        })}
+        {value}
       </div>
     );
   }
