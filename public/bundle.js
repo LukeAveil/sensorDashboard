@@ -19857,6 +19857,11 @@
 	    return React.createElement(
 	      'div',
 	      null,
+	      React.createElement(
+	        'h4',
+	        null,
+	        'Sensor Name'
+	      ),
 	      name,
 	      React.createElement(LatestValue, { value: value }),
 	      React.createElement(LastReported, { time: time })
@@ -19873,6 +19878,7 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
+	var Timestamp = __webpack_require__(190);
 
 	var LastReported = React.createClass({
 	  displayName: 'LastReported',
@@ -19883,7 +19889,12 @@
 	    return React.createElement(
 	      'div',
 	      null,
-	      time
+	      React.createElement(
+	        'h4',
+	        null,
+	        'Last Reported'
+	      ),
+	      React.createElement(Timestamp, { time: time, format: 'full' })
 	    );
 	  }
 	});
@@ -19907,6 +19918,11 @@
 	    return React.createElement(
 	      'div',
 	      null,
+	      React.createElement(
+	        'h4',
+	        null,
+	        'Latest Value'
+	      ),
 	      value
 	    );
 	  }
@@ -21420,6 +21436,207 @@
 	  };
 	};
 
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+	var Timestamp = function (_React$Component) {
+	    _inherits(Timestamp, _React$Component);
+
+	    function Timestamp() {
+	        _classCallCheck(this, Timestamp);
+
+	        return _possibleConstructorReturn(this, (Timestamp.__proto__ || Object.getPrototypeOf(Timestamp)).apply(this, arguments));
+	    }
+
+	    _createClass(Timestamp, [{
+	        key: '_formatString',
+	        value: function _formatString(string) {
+	            var formatted = string,
+	                i,
+	                regexp;
+
+	            for (i in arguments) {
+	                if (i > 0) {
+	                    regexp = new RegExp('\\{' + (i - 1) + '\\}', 'gi');
+	                    formatted = formatted.replace(regexp, arguments[i]);
+	                }
+	            }
+
+	            return formatted;
+	        }
+	    }, {
+	        key: '_plural',
+	        value: function _plural(string, count, many) {
+	            if (count == 1) {
+	                return string;
+	            } else if (many) {
+	                return many;
+	            } else {
+	                return string + "s";
+	            }
+	        }
+	    }, {
+	        key: '_timeAgoInWords',
+	        value: function _timeAgoInWords(date) {
+	            var seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000),
+	                ago;
+
+	            if (seconds < 60) {
+	                // 1 minute
+	                return "Just then";
+	            } else if (seconds < 60 * 60) {
+	                // 1 hour
+	                ago = Math.floor(seconds / 60);
+	                return this._formatString("{0} {1} ago", ago, this._plural('minute', ago));
+	            } else if (seconds < 60 * 60 * 24) {
+	                // 1 day
+	                ago = Math.floor(seconds / (60 * 60));
+	                return this._formatString("{0} {1} ago", ago, this._plural('hour', ago));
+	            } else if (seconds < 60 * 60 * 24 * 7) {
+	                // 1 week
+	                ago = Math.floor(seconds / (60 * 60 * 24));
+	                return this._formatString("{0} {1} ago", ago, this._plural('day', ago));
+	            } else if (seconds < 60 * 60 * 24 * 30) {
+	                // 1 month
+	                ago = Math.floor(seconds / (60 * 60 * 24 * 7));
+	                return this._formatString("{0} {1} ago", ago, this._plural('week', ago));
+	            } else if (seconds < 60 * 60 * 24 * 30 * 12) {
+	                // # 1 year
+	                ago = Math.floor(seconds / (60 * 60 * 24 * 30));
+	                return this._formatString("{0} {1} ago", ago, this._plural('month', ago));
+	            } else {
+	                return this._prettyTime(date);
+	            }
+	        }
+	    }, {
+	        key: '_prettyTime',
+	        value: function _prettyTime(date) {
+	            var hours, minutes, ampm;
+
+	            // eg. 5 Nov 12, 1:37pm
+	            if (date.getHours() % 12 == 0) {
+	                hours = 12;
+	            } else {
+	                hours = date.getHours() % 12;
+	            }
+
+	            if (date.getMinutes() < 10) {
+	                minutes = '0' + date.getMinutes();
+	            } else {
+	                minutes = '' + date.getMinutes();
+	            }
+
+	            if (date.getHours() > 11) {
+	                ampm = 'pm';
+	            } else {
+	                ampm = 'am';
+	            }
+
+	            switch (this.props.format) {
+	                case 'date':
+	                    return (this.props.includeDay ? DAYS[date.getDay()] + ', ' : '') + this._formatString("{0} {1} {2}", date.getDate(), MONTHS[date.getMonth()], date.getFullYear());
+	                case 'time':
+	                    return this._formatString("{0}:{1}{2}", hours, minutes, ampm);
+	                case 'full':
+	                default:
+	                    return (this.props.includeDay ? DAYS[date.getDay()] + ', ' : '') + this._formatString("{0} {1} {2}, {3}:{4}{5}", date.getDate(), MONTHS[date.getMonth()], date.getFullYear(), hours, minutes, ampm);
+	            }
+	        }
+	    }, {
+	        key: '_parseDate',
+	        value: function _parseDate(date) {
+	            if (date === '' || date === false || date === null) return false;
+
+	            if (typeof date === "number" || "" + parseInt(date, 10) == date) {
+	                date = parseInt(date, 10);
+	                date = new Date(date * 1000);
+	            }
+
+	            if (date.toJSON) {
+	                date = date.toJSON();
+	            } else {
+	                date = date.toString();
+	            }
+
+	            var t = date.split(/[:\-TZ\. ]/);
+	            for (var i in t) {
+	                if (t[i] !== '' && isNaN(parseInt(t[i], 10))) return false;
+	            }
+	            var d = new Date("Sun Jan 01 00:00:00 UTC 2012");
+
+	            d.setUTCFullYear(t[0]);
+	            d.setUTCMonth(t[1] - 1);
+	            d.setUTCDate(t[2]);
+	            d.setUTCHours(t[3]);
+	            d.setUTCMinutes(t[4]);
+	            d.setUTCSeconds(t[5]);
+
+	            return d;
+	        }
+	    }, {
+	        key: '_formatDate',
+	        value: function _formatDate(date) {
+	            var d = this._parseDate(date);
+
+	            if (d === false) {
+	                return 'never';
+	            }
+
+	            if (this.props.format == 'ago') {
+	                return this._timeAgoInWords(d);
+	            } else {
+	                return this._prettyTime(d);
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'span',
+	                { className: this.props.className },
+	                this._formatDate(this.props.time)
+	            );
+	        }
+	    }]);
+
+	    return Timestamp;
+	}(_react2.default.Component);
+
+	Timestamp.defaultProps = {
+	    time: new Date(),
+	    format: 'ago',
+	    includeDay: false
+	};
+
+	Timestamp.propTypes = {
+	    time: _react2.default.PropTypes.any.isRequired,
+	    format: _react2.default.PropTypes.string,
+	    className: _react2.default.PropTypes.any,
+	    includeDay: _react2.default.PropTypes.bool
+	};
+
+	module.exports = Timestamp;
 
 /***/ }
 /******/ ]);

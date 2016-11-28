@@ -5,6 +5,7 @@ var LatestValue = React.createClass({
     var {value} = this.props;
     return (
       <div>
+        <h4>Latest Value</h4>
         {value}
       </div>
     );

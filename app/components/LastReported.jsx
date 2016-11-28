@@ -1,11 +1,13 @@
 var React = require('react');
+var Timestamp = require('react-timestamp');
 
 var LastReported = React.createClass({
   render: function() {
     var {time} = this.props;
     return (
       <div>
-        {time}
+        <h4>Last Reported</h4>
+        <Timestamp time={time} format="full"/>
       </div>
     );
   }
