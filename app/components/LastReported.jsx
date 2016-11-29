@@ -8,7 +8,7 @@ var LastReported = React.createClass({
     return (
       <div>
         <h4>Last Reported</h4>
-        <Timestamp time={time} format="full"/>
+        <h5><Timestamp time={time} format="full"/></h5>
       </div>
     );
   }

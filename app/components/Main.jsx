@@ -37,7 +37,7 @@ var Main = React.createClass({
     var {sensors, sensorsData} = this.state;
 
     return (
-      <div>
+      <div className="sensorList">
         <SensorList sensors={sensors} dataList={sensorsData}/>
       </div>
     );

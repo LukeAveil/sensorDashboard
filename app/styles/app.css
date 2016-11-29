@@ -1,0 +1,14 @@
+li {
+  display: inline-block;
+  margin: 0 20px;
+}
+
+.sensor h5 {
+  text-transform: capitalize;
+}
+
+.sensor {
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 20px 50px 0 50px;
+}

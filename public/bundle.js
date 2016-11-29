@@ -98,8 +98,10 @@
 	var ReactDOM = __webpack_require__(165);
 	var Main = __webpack_require__(166);
 
-	__webpack_require__(198);
+	__webpack_require__(194);
 	$(document).foundation();
+
+	__webpack_require__(198);
 
 	ReactDOM.render(React.createElement(Main, null), document.getElementById('app'));
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
@@ -19808,7 +19810,7 @@
 
 	var React = __webpack_require__(8);
 	var SensorList = __webpack_require__(167);
-	var axios = __webpack_require__(173);
+	var axios = __webpack_require__(169);
 
 	var Main = React.createClass({
 	  displayName: 'Main',
@@ -19846,7 +19848,7 @@
 
 	    return React.createElement(
 	      'div',
-	      null,
+	      { className: 'sensorList' },
 	      React.createElement(SensorList, { sensors: sensors, dataList: sensorsData })
 	    );
 	  }
@@ -19884,7 +19886,7 @@
 
 	    return React.createElement(
 	      'div',
-	      { className: 'sensorList' },
+	      null,
 	      renderSensors()
 	    );
 	  }
@@ -19899,9 +19901,9 @@
 	'use strict';
 
 	var React = __webpack_require__(8);
-	var LastReported = __webpack_require__(169);
-	var LatestValue = __webpack_require__(171);
-	var Graph = __webpack_require__(172);
+	var LastReported = __webpack_require__(200);
+	var LatestValue = __webpack_require__(202);
+	var Graph = __webpack_require__(203);
 
 	var Sensor = React.createClass({
 	  displayName: 'Sensor',
@@ -19915,16 +19917,40 @@
 
 	    return React.createElement(
 	      'div',
-	      { className: 'sensor' },
+	      null,
 	      React.createElement(
-	        'h4',
-	        null,
-	        'Sensor Name'
-	      ),
-	      name,
-	      React.createElement(LatestValue, { value: value }),
-	      React.createElement(LastReported, { time: time }),
-	      React.createElement(Graph, { value: value, time: time })
+	        'ul',
+	        { className: 'sensor' },
+	        React.createElement(
+	          'li',
+	          null,
+	          React.createElement(
+	            'h4',
+	            null,
+	            'Sensor Name'
+	          ),
+	          React.createElement(
+	            'h5',
+	            null,
+	            name
+	          )
+	        ),
+	        React.createElement(
+	          'li',
+	          null,
+	          React.createElement(LatestValue, { value: value })
+	        ),
+	        React.createElement(
+	          'li',
+	          null,
+	          React.createElement(LastReported, { time: time })
+	        ),
+	        React.createElement(
+	          'li',
+	          null,
+	          React.createElement(Graph, { value: value, time: time })
+	        )
+	      )
 	    );
 	  }
 	});
@@ -19935,32 +19961,7 @@
 /* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	var React = __webpack_require__(8);
-	var Timestamp = __webpack_require__(170);
-
-	var LastReported = React.createClass({
-	  displayName: 'LastReported',
-
-	  render: function render() {
-	    var time = this.props.time;
-
-
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h4',
-	        null,
-	        'Last Reported'
-	      ),
-	      React.createElement(Timestamp, { time: time, format: 'full' })
-	    );
-	  }
-	});
-
-	module.exports = LastReported;
+	module.exports = __webpack_require__(170);
 
 /***/ },
 /* 170 */
@@ -19968,278 +19969,9 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(8);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-	var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-	var Timestamp = function (_React$Component) {
-	    _inherits(Timestamp, _React$Component);
-
-	    function Timestamp() {
-	        _classCallCheck(this, Timestamp);
-
-	        return _possibleConstructorReturn(this, (Timestamp.__proto__ || Object.getPrototypeOf(Timestamp)).apply(this, arguments));
-	    }
-
-	    _createClass(Timestamp, [{
-	        key: '_formatString',
-	        value: function _formatString(string) {
-	            var formatted = string,
-	                i,
-	                regexp;
-
-	            for (i in arguments) {
-	                if (i > 0) {
-	                    regexp = new RegExp('\\{' + (i - 1) + '\\}', 'gi');
-	                    formatted = formatted.replace(regexp, arguments[i]);
-	                }
-	            }
-
-	            return formatted;
-	        }
-	    }, {
-	        key: '_plural',
-	        value: function _plural(string, count, many) {
-	            if (count == 1) {
-	                return string;
-	            } else if (many) {
-	                return many;
-	            } else {
-	                return string + "s";
-	            }
-	        }
-	    }, {
-	        key: '_timeAgoInWords',
-	        value: function _timeAgoInWords(date) {
-	            var seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000),
-	                ago;
-
-	            if (seconds < 60) {
-	                // 1 minute
-	                return "Just then";
-	            } else if (seconds < 60 * 60) {
-	                // 1 hour
-	                ago = Math.floor(seconds / 60);
-	                return this._formatString("{0} {1} ago", ago, this._plural('minute', ago));
-	            } else if (seconds < 60 * 60 * 24) {
-	                // 1 day
-	                ago = Math.floor(seconds / (60 * 60));
-	                return this._formatString("{0} {1} ago", ago, this._plural('hour', ago));
-	            } else if (seconds < 60 * 60 * 24 * 7) {
-	                // 1 week
-	                ago = Math.floor(seconds / (60 * 60 * 24));
-	                return this._formatString("{0} {1} ago", ago, this._plural('day', ago));
-	            } else if (seconds < 60 * 60 * 24 * 30) {
-	                // 1 month
-	                ago = Math.floor(seconds / (60 * 60 * 24 * 7));
-	                return this._formatString("{0} {1} ago", ago, this._plural('week', ago));
-	            } else if (seconds < 60 * 60 * 24 * 30 * 12) {
-	                // # 1 year
-	                ago = Math.floor(seconds / (60 * 60 * 24 * 30));
-	                return this._formatString("{0} {1} ago", ago, this._plural('month', ago));
-	            } else {
-	                return this._prettyTime(date);
-	            }
-	        }
-	    }, {
-	        key: '_prettyTime',
-	        value: function _prettyTime(date) {
-	            var hours, minutes, ampm;
-
-	            // eg. 5 Nov 12, 1:37pm
-	            if (date.getHours() % 12 == 0) {
-	                hours = 12;
-	            } else {
-	                hours = date.getHours() % 12;
-	            }
-
-	            if (date.getMinutes() < 10) {
-	                minutes = '0' + date.getMinutes();
-	            } else {
-	                minutes = '' + date.getMinutes();
-	            }
-
-	            if (date.getHours() > 11) {
-	                ampm = 'pm';
-	            } else {
-	                ampm = 'am';
-	            }
-
-	            switch (this.props.format) {
-	                case 'date':
-	                    return (this.props.includeDay ? DAYS[date.getDay()] + ', ' : '') + this._formatString("{0} {1} {2}", date.getDate(), MONTHS[date.getMonth()], date.getFullYear());
-	                case 'time':
-	                    return this._formatString("{0}:{1}{2}", hours, minutes, ampm);
-	                case 'full':
-	                default:
-	                    return (this.props.includeDay ? DAYS[date.getDay()] + ', ' : '') + this._formatString("{0} {1} {2}, {3}:{4}{5}", date.getDate(), MONTHS[date.getMonth()], date.getFullYear(), hours, minutes, ampm);
-	            }
-	        }
-	    }, {
-	        key: '_parseDate',
-	        value: function _parseDate(date) {
-	            if (date === '' || date === false || date === null) return false;
-
-	            if (typeof date === "number" || "" + parseInt(date, 10) == date) {
-	                date = parseInt(date, 10);
-	                date = new Date(date * 1000);
-	            }
-
-	            if (date.toJSON) {
-	                date = date.toJSON();
-	            } else {
-	                date = date.toString();
-	            }
-
-	            var t = date.split(/[:\-TZ\. ]/);
-	            for (var i in t) {
-	                if (t[i] !== '' && isNaN(parseInt(t[i], 10))) return false;
-	            }
-	            var d = new Date("Sun Jan 01 00:00:00 UTC 2012");
-
-	            d.setUTCFullYear(t[0]);
-	            d.setUTCMonth(t[1] - 1);
-	            d.setUTCDate(t[2]);
-	            d.setUTCHours(t[3]);
-	            d.setUTCMinutes(t[4]);
-	            d.setUTCSeconds(t[5]);
-
-	            return d;
-	        }
-	    }, {
-	        key: '_formatDate',
-	        value: function _formatDate(date) {
-	            var d = this._parseDate(date);
-
-	            if (d === false) {
-	                return 'never';
-	            }
-
-	            if (this.props.format == 'ago') {
-	                return this._timeAgoInWords(d);
-	            } else {
-	                return this._prettyTime(d);
-	            }
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'span',
-	                { className: this.props.className },
-	                this._formatDate(this.props.time)
-	            );
-	        }
-	    }]);
-
-	    return Timestamp;
-	}(_react2.default.Component);
-
-	Timestamp.defaultProps = {
-	    time: new Date(),
-	    format: 'ago',
-	    includeDay: false
-	};
-
-	Timestamp.propTypes = {
-	    time: _react2.default.PropTypes.any.isRequired,
-	    format: _react2.default.PropTypes.string,
-	    className: _react2.default.PropTypes.any,
-	    includeDay: _react2.default.PropTypes.bool
-	};
-
-	module.exports = Timestamp;
-
-/***/ },
-/* 171 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(8);
-
-	var LatestValue = React.createClass({
-	  displayName: 'LatestValue',
-
-	  render: function render() {
-	    var value = this.props.value;
-
-
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h4',
-	        null,
-	        'Latest Value'
-	      ),
-	      value
-	    );
-	  }
-	});
-
-	module.exports = LatestValue;
-
-/***/ },
-/* 172 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(8);
-	var Timestamp = __webpack_require__(170);
-
-	var Graph = React.createClass({
-	  displayName: 'Graph',
-
-	  render: function render() {
-	    var _props = this.props,
-	        time = _props.time,
-	        value = _props.value;
-
-
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h4',
-	        null,
-	        'Graph Component'
-	      )
-	    );
-	  }
-	});
-
-	module.exports = Graph;
-
-/***/ },
-/* 173 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(174);
-
-/***/ },
-/* 174 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var utils = __webpack_require__(175);
-	var bind = __webpack_require__(176);
-	var Axios = __webpack_require__(177);
+	var utils = __webpack_require__(171);
+	var bind = __webpack_require__(172);
+	var Axios = __webpack_require__(173);
 
 	/**
 	 * Create an instance of Axios
@@ -20272,15 +20004,15 @@
 	};
 
 	// Expose Cancel & CancelToken
-	axios.Cancel = __webpack_require__(195);
-	axios.CancelToken = __webpack_require__(196);
-	axios.isCancel = __webpack_require__(192);
+	axios.Cancel = __webpack_require__(191);
+	axios.CancelToken = __webpack_require__(192);
+	axios.isCancel = __webpack_require__(188);
 
 	// Expose all/spread
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(197);
+	axios.spread = __webpack_require__(193);
 
 	module.exports = axios;
 
@@ -20289,12 +20021,12 @@
 
 
 /***/ },
-/* 175 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var bind = __webpack_require__(176);
+	var bind = __webpack_require__(172);
 
 	/*global toString:true*/
 
@@ -20594,7 +20326,7 @@
 
 
 /***/ },
-/* 176 */
+/* 172 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20611,17 +20343,17 @@
 
 
 /***/ },
-/* 177 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(178);
-	var utils = __webpack_require__(175);
-	var InterceptorManager = __webpack_require__(189);
-	var dispatchRequest = __webpack_require__(190);
-	var isAbsoluteURL = __webpack_require__(193);
-	var combineURLs = __webpack_require__(194);
+	var defaults = __webpack_require__(174);
+	var utils = __webpack_require__(171);
+	var InterceptorManager = __webpack_require__(185);
+	var dispatchRequest = __webpack_require__(186);
+	var isAbsoluteURL = __webpack_require__(189);
+	var combineURLs = __webpack_require__(190);
 
 	/**
 	 * Create a new instance of Axios
@@ -20702,13 +20434,13 @@
 
 
 /***/ },
-/* 178 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(175);
-	var normalizeHeaderName = __webpack_require__(179);
+	var utils = __webpack_require__(171);
+	var normalizeHeaderName = __webpack_require__(175);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -20725,10 +20457,10 @@
 	  var adapter;
 	  if (typeof XMLHttpRequest !== 'undefined') {
 	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(180);
+	    adapter = __webpack_require__(176);
 	  } else if (typeof process !== 'undefined') {
 	    // For node use HTTP adapter
-	    adapter = __webpack_require__(180);
+	    adapter = __webpack_require__(176);
 	  }
 	  return adapter;
 	}
@@ -20795,12 +20527,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ },
-/* 179 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(175);
+	var utils = __webpack_require__(171);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -20813,18 +20545,18 @@
 
 
 /***/ },
-/* 180 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(175);
-	var settle = __webpack_require__(181);
-	var buildURL = __webpack_require__(184);
-	var parseHeaders = __webpack_require__(185);
-	var isURLSameOrigin = __webpack_require__(186);
-	var createError = __webpack_require__(182);
-	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(187);
+	var utils = __webpack_require__(171);
+	var settle = __webpack_require__(177);
+	var buildURL = __webpack_require__(180);
+	var parseHeaders = __webpack_require__(181);
+	var isURLSameOrigin = __webpack_require__(182);
+	var createError = __webpack_require__(178);
+	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(183);
 
 	module.exports = function xhrAdapter(config) {
 	  return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -20920,7 +20652,7 @@
 	    // This is only done if running in a standard browser environment.
 	    // Specifically not if we're in a web worker, or react-native.
 	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(188);
+	      var cookies = __webpack_require__(184);
 
 	      // Add xsrf header
 	      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -20997,12 +20729,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ },
-/* 181 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var createError = __webpack_require__(182);
+	var createError = __webpack_require__(178);
 
 	/**
 	 * Resolve or reject a Promise based on response status.
@@ -21028,12 +20760,12 @@
 
 
 /***/ },
-/* 182 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var enhanceError = __webpack_require__(183);
+	var enhanceError = __webpack_require__(179);
 
 	/**
 	 * Create an Error with the specified message, config, error code, and response.
@@ -21051,7 +20783,7 @@
 
 
 /***/ },
-/* 183 */
+/* 179 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21076,12 +20808,12 @@
 
 
 /***/ },
-/* 184 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(175);
+	var utils = __webpack_require__(171);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -21150,12 +20882,12 @@
 
 
 /***/ },
-/* 185 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(175);
+	var utils = __webpack_require__(171);
 
 	/**
 	 * Parse headers into an object
@@ -21193,12 +20925,12 @@
 
 
 /***/ },
-/* 186 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(175);
+	var utils = __webpack_require__(171);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -21267,7 +20999,7 @@
 
 
 /***/ },
-/* 187 */
+/* 183 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21309,12 +21041,12 @@
 
 
 /***/ },
-/* 188 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(175);
+	var utils = __webpack_require__(171);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -21368,12 +21100,12 @@
 
 
 /***/ },
-/* 189 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(175);
+	var utils = __webpack_require__(171);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -21426,15 +21158,15 @@
 
 
 /***/ },
-/* 190 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(175);
-	var transformData = __webpack_require__(191);
-	var isCancel = __webpack_require__(192);
-	var defaults = __webpack_require__(178);
+	var utils = __webpack_require__(171);
+	var transformData = __webpack_require__(187);
+	var isCancel = __webpack_require__(188);
+	var defaults = __webpack_require__(174);
 
 	/**
 	 * Throws a `Cancel` if cancellation has been requested.
@@ -21511,12 +21243,12 @@
 
 
 /***/ },
-/* 191 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(175);
+	var utils = __webpack_require__(171);
 
 	/**
 	 * Transform the data for a request or a response
@@ -21537,7 +21269,7 @@
 
 
 /***/ },
-/* 192 */
+/* 188 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21548,7 +21280,7 @@
 
 
 /***/ },
-/* 193 */
+/* 189 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21568,7 +21300,7 @@
 
 
 /***/ },
-/* 194 */
+/* 190 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21586,7 +21318,7 @@
 
 
 /***/ },
-/* 195 */
+/* 191 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21611,12 +21343,12 @@
 
 
 /***/ },
-/* 196 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Cancel = __webpack_require__(195);
+	var Cancel = __webpack_require__(191);
 
 	/**
 	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -21674,7 +21406,7 @@
 
 
 /***/ },
-/* 197 */
+/* 193 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21707,16 +21439,16 @@
 
 
 /***/ },
-/* 198 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(199);
+	var content = __webpack_require__(195);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(201)(content, {});
+	var update = __webpack_require__(197)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -21733,10 +21465,10 @@
 	}
 
 /***/ },
-/* 199 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(200)();
+	exports = module.exports = __webpack_require__(196)();
 	// imports
 
 
@@ -21747,7 +21479,7 @@
 
 
 /***/ },
-/* 200 */
+/* 196 */
 /***/ function(module, exports) {
 
 	/*
@@ -21803,7 +21535,7 @@
 
 
 /***/ },
-/* 201 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -22055,6 +21787,348 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+/* 198 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(199);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(197)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./app.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./app.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 199 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(196)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "li {\n  display: inline-block;\n  margin: 0 20px;\n}\n\n.sensor h5 {\n  text-transform: capitalize;\n}\n\n.sensor {\n  border: 2px solid black;\n  border-radius: 5px;\n  margin: 20px 50px 0 50px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(8);
+	var Timestamp = __webpack_require__(201);
+
+	var LastReported = React.createClass({
+	  displayName: 'LastReported',
+
+	  render: function render() {
+	    var time = this.props.time;
+
+
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h4',
+	        null,
+	        'Last Reported'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        React.createElement(Timestamp, { time: time, format: 'full' })
+	      )
+	    );
+	  }
+	});
+
+	module.exports = LastReported;
+
+/***/ },
+/* 201 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(8);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+	var Timestamp = function (_React$Component) {
+	    _inherits(Timestamp, _React$Component);
+
+	    function Timestamp() {
+	        _classCallCheck(this, Timestamp);
+
+	        return _possibleConstructorReturn(this, (Timestamp.__proto__ || Object.getPrototypeOf(Timestamp)).apply(this, arguments));
+	    }
+
+	    _createClass(Timestamp, [{
+	        key: '_formatString',
+	        value: function _formatString(string) {
+	            var formatted = string,
+	                i,
+	                regexp;
+
+	            for (i in arguments) {
+	                if (i > 0) {
+	                    regexp = new RegExp('\\{' + (i - 1) + '\\}', 'gi');
+	                    formatted = formatted.replace(regexp, arguments[i]);
+	                }
+	            }
+
+	            return formatted;
+	        }
+	    }, {
+	        key: '_plural',
+	        value: function _plural(string, count, many) {
+	            if (count == 1) {
+	                return string;
+	            } else if (many) {
+	                return many;
+	            } else {
+	                return string + "s";
+	            }
+	        }
+	    }, {
+	        key: '_timeAgoInWords',
+	        value: function _timeAgoInWords(date) {
+	            var seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000),
+	                ago;
+
+	            if (seconds < 60) {
+	                // 1 minute
+	                return "Just then";
+	            } else if (seconds < 60 * 60) {
+	                // 1 hour
+	                ago = Math.floor(seconds / 60);
+	                return this._formatString("{0} {1} ago", ago, this._plural('minute', ago));
+	            } else if (seconds < 60 * 60 * 24) {
+	                // 1 day
+	                ago = Math.floor(seconds / (60 * 60));
+	                return this._formatString("{0} {1} ago", ago, this._plural('hour', ago));
+	            } else if (seconds < 60 * 60 * 24 * 7) {
+	                // 1 week
+	                ago = Math.floor(seconds / (60 * 60 * 24));
+	                return this._formatString("{0} {1} ago", ago, this._plural('day', ago));
+	            } else if (seconds < 60 * 60 * 24 * 30) {
+	                // 1 month
+	                ago = Math.floor(seconds / (60 * 60 * 24 * 7));
+	                return this._formatString("{0} {1} ago", ago, this._plural('week', ago));
+	            } else if (seconds < 60 * 60 * 24 * 30 * 12) {
+	                // # 1 year
+	                ago = Math.floor(seconds / (60 * 60 * 24 * 30));
+	                return this._formatString("{0} {1} ago", ago, this._plural('month', ago));
+	            } else {
+	                return this._prettyTime(date);
+	            }
+	        }
+	    }, {
+	        key: '_prettyTime',
+	        value: function _prettyTime(date) {
+	            var hours, minutes, ampm;
+
+	            // eg. 5 Nov 12, 1:37pm
+	            if (date.getHours() % 12 == 0) {
+	                hours = 12;
+	            } else {
+	                hours = date.getHours() % 12;
+	            }
+
+	            if (date.getMinutes() < 10) {
+	                minutes = '0' + date.getMinutes();
+	            } else {
+	                minutes = '' + date.getMinutes();
+	            }
+
+	            if (date.getHours() > 11) {
+	                ampm = 'pm';
+	            } else {
+	                ampm = 'am';
+	            }
+
+	            switch (this.props.format) {
+	                case 'date':
+	                    return (this.props.includeDay ? DAYS[date.getDay()] + ', ' : '') + this._formatString("{0} {1} {2}", date.getDate(), MONTHS[date.getMonth()], date.getFullYear());
+	                case 'time':
+	                    return this._formatString("{0}:{1}{2}", hours, minutes, ampm);
+	                case 'full':
+	                default:
+	                    return (this.props.includeDay ? DAYS[date.getDay()] + ', ' : '') + this._formatString("{0} {1} {2}, {3}:{4}{5}", date.getDate(), MONTHS[date.getMonth()], date.getFullYear(), hours, minutes, ampm);
+	            }
+	        }
+	    }, {
+	        key: '_parseDate',
+	        value: function _parseDate(date) {
+	            if (date === '' || date === false || date === null) return false;
+
+	            if (typeof date === "number" || "" + parseInt(date, 10) == date) {
+	                date = parseInt(date, 10);
+	                date = new Date(date * 1000);
+	            }
+
+	            if (date.toJSON) {
+	                date = date.toJSON();
+	            } else {
+	                date = date.toString();
+	            }
+
+	            var t = date.split(/[:\-TZ\. ]/);
+	            for (var i in t) {
+	                if (t[i] !== '' && isNaN(parseInt(t[i], 10))) return false;
+	            }
+	            var d = new Date("Sun Jan 01 00:00:00 UTC 2012");
+
+	            d.setUTCFullYear(t[0]);
+	            d.setUTCMonth(t[1] - 1);
+	            d.setUTCDate(t[2]);
+	            d.setUTCHours(t[3]);
+	            d.setUTCMinutes(t[4]);
+	            d.setUTCSeconds(t[5]);
+
+	            return d;
+	        }
+	    }, {
+	        key: '_formatDate',
+	        value: function _formatDate(date) {
+	            var d = this._parseDate(date);
+
+	            if (d === false) {
+	                return 'never';
+	            }
+
+	            if (this.props.format == 'ago') {
+	                return this._timeAgoInWords(d);
+	            } else {
+	                return this._prettyTime(d);
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'span',
+	                { className: this.props.className },
+	                this._formatDate(this.props.time)
+	            );
+	        }
+	    }]);
+
+	    return Timestamp;
+	}(_react2.default.Component);
+
+	Timestamp.defaultProps = {
+	    time: new Date(),
+	    format: 'ago',
+	    includeDay: false
+	};
+
+	Timestamp.propTypes = {
+	    time: _react2.default.PropTypes.any.isRequired,
+	    format: _react2.default.PropTypes.string,
+	    className: _react2.default.PropTypes.any,
+	    includeDay: _react2.default.PropTypes.bool
+	};
+
+	module.exports = Timestamp;
+
+/***/ },
+/* 202 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(8);
+
+	var LatestValue = React.createClass({
+	  displayName: 'LatestValue',
+
+	  render: function render() {
+	    var value = this.props.value;
+
+
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h4',
+	        null,
+	        'Latest Value'
+	      ),
+	      React.createElement(
+	        'h5',
+	        null,
+	        value
+	      )
+	    );
+	  }
+	});
+
+	module.exports = LatestValue;
+
+/***/ },
+/* 203 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(8);
+	var Timestamp = __webpack_require__(201);
+
+	var Graph = React.createClass({
+	  displayName: 'Graph',
+
+	  render: function render() {
+	    var _props = this.props,
+	        time = _props.time,
+	        value = _props.value;
+
+
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h4',
+	        null,
+	        'Last Five Minutes'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Graph;
 
 /***/ }
 /******/ ]);

@@ -18,7 +18,7 @@ var SensorList = React.createClass({
     };
 
     return (
-      <div className="sensorList">
+      <div>
         {renderSensors()}
       </div>
     );

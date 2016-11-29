@@ -7,7 +7,7 @@ var LatestValue = React.createClass({
     return (
       <div>
         <h4>Latest Value</h4>
-        {value}
+        <h5>{value}</h5>
       </div>
     );
   }

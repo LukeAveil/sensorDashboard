@@ -27,7 +27,8 @@ module.exports = {
       Sensor: 'app/components/Sensor.jsx',
       LastReported: 'app/components/LastReported.jsx',
       LatestValue: 'app/components/LatestValue.jsx',
-      Graph: 'app/components/Graph.jsx'
+      Graph: 'app/components/Graph.jsx',
+      applicationStyles: 'app/styles/app.css'
     },
     extensions: ['', '.js', '.jsx']
   },

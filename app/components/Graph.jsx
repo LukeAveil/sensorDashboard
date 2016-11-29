@@ -7,8 +7,8 @@ var Graph = React.createClass({
 
     return (
       <div>
-        <h4>Graph Component</h4>
-        
+        <h4>Last Five Minutes</h4>
+
       </div>
     );
   }
