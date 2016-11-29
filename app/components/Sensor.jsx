@@ -8,11 +8,12 @@ var Sensor = React.createClass({
     var {name, time, value} = this.props;
 
     return (
-      <div>
+      <div className="sensor">
         <h4>Sensor Name</h4>
         {name}
         <LatestValue value={value}/>
         <LastReported time={time}/>
+        <Graph value={value} time={time}/>
       </div>
     );
   }

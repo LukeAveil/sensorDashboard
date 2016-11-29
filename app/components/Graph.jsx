@@ -1,10 +1,14 @@
 var React = require('react');
+var Timestamp = require('react-timestamp');
 
 var Graph = React.createClass({
   render: function() {
+    var {time, value} = this.props;
+
     return (
       <div>
-        <h2>Graph Component</h2>
+        <h4>Graph Component</h4>
+        
       </div>
     );
   }
