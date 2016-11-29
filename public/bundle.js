@@ -21823,7 +21823,7 @@
 
 
 	// module
-	exports.push([module.id, "li {\n  display: inline-block;\n  margin: 0 20px;\n}\n\n.sensor h5 {\n  text-transform: capitalize;\n}\n\n.sensor {\n  border: 2px solid black;\n  border-radius: 5px;\n  margin: 20px 50px 0 50px;\n}\n", ""]);
+	exports.push([module.id, "li {\n  display: inline-block;\n  margin: 0 20px;\n}\n\nh4 {\n  font-weight: bold;\n}\n\n.sensor h5 {\n  text-transform: capitalize;\n}\n\n.sensor {\n  border: 2px solid black;\n  border-radius: 5px;\n  margin: 20px 50px 0 50px;\n}\n", ""]);
 
 	// exports
 

@@ -3,6 +3,10 @@ li {
   margin: 0 20px;
 }
 
+h4 {
+  font-weight: bold;
+}
+
 .sensor h5 {
   text-transform: capitalize;
 }
