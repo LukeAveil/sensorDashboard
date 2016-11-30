@@ -23,18 +23,8 @@ var Main = React.createClass({
       axios
         .get("http://localhost:3000/data.json")
         .then(function(result) {
-          var sensorDataToId = new Map();
-          for(var i = 0; i < result.length; i++) {
-            var datum = result[i];
-            var sensorId = datum.sensorId;
-            if (sensorDataToId.get(sensorId) === undefined) {
-              sensorDataToId.set(sensorId, []);
-            }
-
-            sensorDataToId.get(sensorId).push(datum)
-          }
           _this.setState({
-            sensorsData: sensorDataToId
+            sensorsData: result.data
           });
         })
   },
@@ -48,7 +38,7 @@ var Main = React.createClass({
 
     return (
       <div className="sensorList">
-        <SensorList sensors={sensors} data={sensorsData}/>
+        <SensorList sensors={sensors} dataList={sensorsData}/>
       </div>
     );
   }

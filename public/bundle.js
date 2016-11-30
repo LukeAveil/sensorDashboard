@@ -19830,18 +19830,8 @@
 	      });
 	    });
 	    axios.get("http://localhost:3000/data.json").then(function (result) {
-	      var sensorDataToId = new Map();
-	      for (var i = 0; i < result.length; i++) {
-	        var datum = result[i];
-	        var sensorId = datum.sensorId;
-	        if (sensorDataToId.get(sensorId) === undefined) {
-	          sensorDataToId.set(sensorId, []);
-	        }
-
-	        sensorDataToId.get(sensorId).push(datum);
-	      }
 	      _this.setState({
-	        sensorsData: sensorDataToId
+	        sensorsData: result.data
 	      });
 	    });
 	  },
@@ -19859,7 +19849,7 @@
 	    return React.createElement(
 	      'div',
 	      { className: 'sensorList' },
-	      React.createElement(SensorList, { sensors: sensors, data: sensorsData })
+	      React.createElement(SensorList, { sensors: sensors, dataList: sensorsData })
 	    );
 	  }
 	});
@@ -19880,13 +19870,17 @@
 
 	  render: function render() {
 	    var _props = this.props,
-	        data = _props.data,
+	        dataList = _props.dataList,
 	        sensors = _props.sensors;
 
 
 	    var renderSensors = function renderSensors() {
 	      return sensors.map(function (sensor) {
-	        return React.createElement(Sensor, { key: sensor.id, name: sensor.name, value: data.get(sensor.id) });
+	        return dataList.map(function (data) {
+	          if (data.sensorId === sensor.id) {
+	            return React.createElement(Sensor, { key: data.sensorId, name: sensor.name, value: data.value, time: data.time });
+	          }
+	        });
 	      });
 	    };
 
