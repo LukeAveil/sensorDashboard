@@ -24,7 +24,7 @@ var Main = React.createClass({
         .get("http://localhost:3000/data.json")
         .then(function(result) {
           var sensorDataToId = new Map();
-          for(var i = 0; i < result.length; i++) {
+          for(var i = 0; i < data.length; i++) {
             var datum = result[i];
             var sensorId = datum.sensorId;
             if (sensorDataToId.get(sensorId) === undefined) {
