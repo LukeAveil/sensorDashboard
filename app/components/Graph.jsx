@@ -1,5 +1,5 @@
-var React = require('react');
-import { Sparklines, SparklinesLine } from 'react-sparklines';
+var React = require("react");
+import { Sparklines, SparklinesLine } from "react-sparklines";
 
 var Graph = React.createClass({
   render: function() {

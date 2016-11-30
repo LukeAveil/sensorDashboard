@@ -1,6 +1,6 @@
-var React = require('react');
-var SensorList = require('SensorList');
-var axios = require('axios');
+var React = require("react");
+var SensorList = require("SensorList");
+var axios = require("axios");
 
 var Main = React.createClass({
   getInitialState: function() {

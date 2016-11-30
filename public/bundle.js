@@ -92,7 +92,7 @@
 /* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+	/* WEBPACK VAR INJECTION */(function($) {"use strict";
 
 	var React = __webpack_require__(8);
 	var ReactDOM = __webpack_require__(165);
@@ -103,7 +103,7 @@
 
 	__webpack_require__(203);
 
-	ReactDOM.render(React.createElement(Main, null), document.getElementById('app'));
+	ReactDOM.render(React.createElement(Main, null), document.getElementById("app"));
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ },
@@ -19806,14 +19806,14 @@
 /* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(8);
 	var SensorList = __webpack_require__(167);
 	var axios = __webpack_require__(174);
 
 	var Main = React.createClass({
-	  displayName: 'Main',
+	  displayName: "Main",
 
 	  getInitialState: function getInitialState() {
 	    return {
@@ -19847,8 +19847,8 @@
 
 
 	    return React.createElement(
-	      'div',
-	      { className: 'sensorList' },
+	      "div",
+	      { className: "sensorList" },
 	      React.createElement(SensorList, { sensors: sensors, dataList: sensorsData })
 	    );
 	  }
@@ -19860,13 +19860,13 @@
 /* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(8);
 	var Sensor = __webpack_require__(168);
 
 	var SensorList = React.createClass({
-	  displayName: 'SensorList',
+	  displayName: "SensorList",
 
 	  render: function render() {
 	    var _props = this.props,
@@ -19885,7 +19885,7 @@
 	    };
 
 	    return React.createElement(
-	      'div',
+	      "div",
 	      null,
 	      renderSensors()
 	    );
@@ -19898,7 +19898,7 @@
 /* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(8);
 	var LastReported = __webpack_require__(169);
@@ -19906,7 +19906,7 @@
 	var Graph = __webpack_require__(172);
 
 	var Sensor = React.createClass({
-	  displayName: 'Sensor',
+	  displayName: "Sensor",
 
 	  render: function render() {
 	    var _props = this.props,
@@ -19916,37 +19916,37 @@
 
 
 	    return React.createElement(
-	      'div',
+	      "div",
 	      null,
 	      React.createElement(
-	        'ul',
-	        { className: 'sensor' },
+	        "ul",
+	        { className: "sensor" },
 	        React.createElement(
-	          'li',
+	          "li",
 	          null,
 	          React.createElement(
-	            'h4',
+	            "h4",
 	            null,
-	            'Sensor Name'
+	            "Sensor Name"
 	          ),
 	          React.createElement(
-	            'h5',
+	            "h5",
 	            null,
 	            name
 	          )
 	        ),
 	        React.createElement(
-	          'li',
+	          "li",
 	          null,
 	          React.createElement(LatestValue, { value: value })
 	        ),
 	        React.createElement(
-	          'li',
+	          "li",
 	          null,
 	          React.createElement(LastReported, { time: time })
 	        ),
 	        React.createElement(
-	          'li',
+	          "li",
 	          null,
 	          React.createElement(Graph, { value: value, time: time })
 	        )
@@ -19961,30 +19961,30 @@
 /* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(8);
 	var Timestamp = __webpack_require__(170);
 
 	var LastReported = React.createClass({
-	  displayName: 'LastReported',
+	  displayName: "LastReported",
 
 	  render: function render() {
 	    var time = this.props.time;
 
 
 	    return React.createElement(
-	      'div',
+	      "div",
 	      null,
 	      React.createElement(
-	        'h4',
+	        "h4",
 	        null,
-	        'Last Reported'
+	        "Last Reported"
 	      ),
 	      React.createElement(
-	        'h5',
+	        "h5",
 	        null,
-	        React.createElement(Timestamp, { time: time, format: 'full' })
+	        React.createElement(Timestamp, { time: time, format: "full" })
 	      )
 	    );
 	  }
@@ -20197,27 +20197,27 @@
 /* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(8);
 
 	var LatestValue = React.createClass({
-	  displayName: 'LatestValue',
+	  displayName: "LatestValue",
 
 	  render: function render() {
 	    var value = this.props.value;
 
 
 	    return React.createElement(
-	      'div',
+	      "div",
 	      null,
 	      React.createElement(
-	        'h4',
+	        "h4",
 	        null,
-	        'Latest Value'
+	        "Latest Value"
 	      ),
 	      React.createElement(
-	        'h5',
+	        "h5",
 	        null,
 	        value
 	      )
@@ -20231,7 +20231,7 @@
 /* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var _reactSparklines = __webpack_require__(173);
 
@@ -20239,7 +20239,7 @@
 
 
 	var Graph = React.createClass({
-	  displayName: 'Graph',
+	  displayName: "Graph",
 
 	  render: function render() {
 	    var _props = this.props,
@@ -20248,17 +20248,17 @@
 
 
 	    return React.createElement(
-	      'div',
-	      { className: 'graph' },
+	      "div",
+	      { className: "graph" },
 	      React.createElement(
-	        'h6',
+	        "h6",
 	        null,
-	        'Last Five Minutes'
+	        "Last Five Minutes"
 	      ),
 	      React.createElement(
 	        _reactSparklines.Sparklines,
 	        { data: [5, 10, 5, 20, 5] },
-	        React.createElement(_reactSparklines.SparklinesLine, { color: 'blue' })
+	        React.createElement(_reactSparklines.SparklinesLine, { color: "blue" })
 	      )
 	    );
 	  }

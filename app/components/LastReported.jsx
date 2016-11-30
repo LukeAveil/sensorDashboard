@@ -1,5 +1,5 @@
-var React = require('react');
-var Timestamp = require('react-timestamp');
+var React = require("react");
+var Timestamp = require("react-timestamp");
 
 var LastReported = React.createClass({
   render: function() {

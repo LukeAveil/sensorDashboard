@@ -1,5 +1,5 @@
-var React = require('react');
-var Sensor = require('Sensor');
+var React = require("react");
+var Sensor = require("Sensor");
 
 var SensorList = React.createClass({
   render: function() {
