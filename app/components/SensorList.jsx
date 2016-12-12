@@ -17,6 +17,20 @@ var SensorList = React.createClass({
       });
     };
 
+    // var renderSensors = () => {
+    //   return sensors.forEach((sensor) => {
+    //     return dataList.forEach((data) => {
+    //       if( sensor.id === dataList.sensorId ) {
+    //         return dataList.map((data, sensor) => {
+    //           return (
+    //             <Sensor key={data.sensorId} name={sensor.name} value={data.value} time={data.time}/>
+    //           );
+    //         })
+    //       }
+    //     })
+    //   });
+    // };
+
     return (
       <div>
         {renderSensors()}

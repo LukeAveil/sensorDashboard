@@ -28,7 +28,8 @@ module.exports = {
       LastReported: 'app/components/LastReported.jsx',
       LatestValue: 'app/components/LatestValue.jsx',
       Graph: 'app/components/Graph.jsx',
-      applicationStyles: 'app/styles/app.css'
+      applicationStyles: 'app/styles/app.css',
+      apiCall: 'app/api/apiCall.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },

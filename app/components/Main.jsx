@@ -1,6 +1,6 @@
 var React = require("react");
 var SensorList = require("SensorList");
-var axios = require("axios");
+var apiCall = require("apiCall");
 
 var Main = React.createClass({
   getInitialState: function() {
@@ -12,25 +12,23 @@ var Main = React.createClass({
 
   componentDidMount: function() {
     var _this = this;
-    this.serverRequest =
-      axios
-        .get("http://localhost:3000/sensors.json")
-        .then(function(result) {
-          _this.setState({
-            sensors: result.data
-          });
-        })
-      axios
-        .get("http://localhost:3000/data.json")
-        .then(function(result) {
-          _this.setState({
-            sensorsData: result.data
-          });
-        })
+
+    apiCall.getSensors().then(function(result) {
+      _this.setState({
+        sensors: result
+      });
+    })
+
+    apiCall.getData().then(function(result) {
+      _this.setState({
+        sensorsData: result
+      });
+    })
   },
 
   componentWillUnmount: function() {
-    this.serverRequest.abort();
+    apiCall.getSensors.abort();
+    apiCall.getData.abort();
   },
 
   render: function() {
