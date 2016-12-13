@@ -3,7 +3,7 @@ var LastReported = require("LastReported");
 var LatestValue = require("LatestValue");
 var Graph = require("Graph");
 
-var Sensor = ({name, time, value}) => {
+var Sensor = ({name, time, value, spread}) => {
   return (
     <div>
       <ul className="sensor">
@@ -18,7 +18,7 @@ var Sensor = ({name, time, value}) => {
           <LastReported time={time}/>
         </li>
         <li>
-          <Graph value={value} time={time}/>
+          <Graph data={spread}/>
         </li>
       </ul>
     </div>

@@ -13,11 +13,15 @@ var SensorList = React.createClass({
           return b.time - a.time;
         });
 
-        // const latestFive = dataForSensor.slice(1, 6);
         const latestValue = dataForSensor[dataForSensor.length - 1];
-        // console.log(latestFive);
+        const latestFive = dataForSensor.slice(-5);
+
+        const latestFiveValues = latestFive.map((data) => {
+          return data.value;
+        });
+
         return (
-          <Sensor key={sensor.id} name={sensor.name} value={latestValue.value} time={latestValue.time}/>
+          <Sensor key={sensor.id} name={sensor.name} value={latestValue.value} time={latestValue.time} spread={latestFiveValues}/>
         )
       });
     };
