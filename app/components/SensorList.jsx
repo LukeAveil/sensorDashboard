@@ -7,29 +7,20 @@ var SensorList = React.createClass({
 
     var renderSensors = () => {
       return sensors.map((sensor) => {
-        return dataList.map((data) => {
-          if (data.sensorId === sensor.id) {
-            return (
-              <Sensor key={data.sensorId} name={sensor.name} value={data.value} time={data.time}/>
-            );
-          }
-        })
+        const dataForSensor = dataList.filter((data) => {
+          return data.sensorId === sensor.id;
+        }).sort((a, b) => {
+          return b.time - a.time;
+        });
+
+        // const latestFive = dataForSensor.slice(1, 6);
+        const latestValue = dataForSensor[dataForSensor.length - 1];
+        // console.log(latestFive);
+        return (
+          <Sensor key={sensor.id} name={sensor.name} value={latestValue.value} time={latestValue.time}/>
+        )
       });
     };
-
-    // var renderSensors = () => {
-    //   return sensors.forEach((sensor) => {
-    //     return dataList.forEach((data) => {
-    //       if( sensor.id === dataList.sensorId ) {
-    //         return dataList.map((data, sensor) => {
-    //           return (
-    //             <Sensor key={data.sensorId} name={sensor.name} value={data.value} time={data.time}/>
-    //           );
-    //         })
-    //       }
-    //     })
-    //   });
-    // };
 
     return (
       <div>

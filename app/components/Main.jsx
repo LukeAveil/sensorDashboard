@@ -13,16 +13,13 @@ var Main = React.createClass({
   componentDidMount: function() {
     var _this = this;
 
-    apiCall.getSensors().then(function(result) {
-      _this.setState({
-        sensors: result
-      });
-    })
-
-    apiCall.getData().then(function(result) {
-      _this.setState({
-        sensorsData: result
-      });
+    apiCall.getSensors().then(function(sensors) {
+      apiCall.getData().then(function(data) {
+        _this.setState({
+          sensorsData: data,
+          sensors: sensors
+        });
+      })
     })
   },
 
